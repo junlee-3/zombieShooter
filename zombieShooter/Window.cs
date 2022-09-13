@@ -8,6 +8,7 @@ public partial class Window : Form
     private int speed = 10;
     private int ammunition = 10;
     private int zombieSpeed = 3;
+    private int score = 0;
     private Random randNum = new Random();
 
     private List<PictureBox> zombiesList = new List<PictureBox>(); 
@@ -19,7 +20,38 @@ public partial class Window : Form
 
     private void MainTimerEvent(object sender, EventArgs e)
     {
+        if (playerHealth > 1)
+        {
+            healthBar.Value = playerHealth;
+        }
+        else
+        {
+            gameOver = true;
+        }
 
+        txtAmmo.Text = "Ammunition: " + ammunition;
+        txtScore.Text = "Kills: " + score;
+
+        if (_goLeft == true && player.Left > 0)
+        {
+            player.Left -= speed; 
+        }
+        
+        if (_goRight == true && player.Left + player.Width < this.ClientSize.Width)
+        {
+            player.Left += speed;
+        }
+
+        if (_goUp == true && player.Top > 0)
+        {
+            player.Top -= speed;
+        }
+
+        if (_goDown == true && player.Top + player.Height < this.ClientSize.Height)
+        {
+            player.Top += speed;
+        }
+        
     }
 
     private void KeyIsDown(object sender, KeyEventArgs e)
@@ -64,6 +96,9 @@ public partial class Window : Form
                 break;
             case Keys.S:
                 _goDown = false;
+                break;
+            case Keys.Space:
+                ShootBullet(facing);
                 break;
         }
     }
