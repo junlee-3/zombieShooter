@@ -1,0 +1,17 @@
+E:\Coding 2022\zombieShooter\zombieShooter\bin\Debug\net6.0-windows\zombieShooter.exe
+E:\Coding 2022\zombieShooter\zombieShooter\bin\Debug\net6.0-windows\zombieShooter.deps.json
+E:\Coding 2022\zombieShooter\zombieShooter\bin\Debug\net6.0-windows\zombieShooter.runtimeconfig.json
+E:\Coding 2022\zombieShooter\zombieShooter\bin\Debug\net6.0-windows\zombieShooter.dll
+E:\Coding 2022\zombieShooter\zombieShooter\bin\Debug\net6.0-windows\zombieShooter.pdb
+E:\Coding 2022\zombieShooter\zombieShooter\obj\Debug\net6.0-windows\zombieShooter.csproj.AssemblyReference.cache
+E:\Coding 2022\zombieShooter\zombieShooter\obj\Debug\net6.0-windows\zombieShooter.Window.resources
+E:\Coding 2022\zombieShooter\zombieShooter\obj\Debug\net6.0-windows\zombieShooter.csproj.GenerateResource.cache
+E:\Coding 2022\zombieShooter\zombieShooter\obj\Debug\net6.0-windows\zombieShooter.GeneratedMSBuildEditorConfig.editorconfig
+E:\Coding 2022\zombieShooter\zombieShooter\obj\Debug\net6.0-windows\zombieShooter.AssemblyInfoInputs.cache
+E:\Coding 2022\zombieShooter\zombieShooter\obj\Debug\net6.0-windows\zombieShooter.AssemblyInfo.cs
+E:\Coding 2022\zombieShooter\zombieShooter\obj\Debug\net6.0-windows\zombieShooter.csproj.CoreCompileInputs.cache
+E:\Coding 2022\zombieShooter\zombieShooter\obj\Debug\net6.0-windows\zombieShooter.dll
+E:\Coding 2022\zombieShooter\zombieShooter\obj\Debug\net6.0-windows\refint\zombieShooter.dll
+E:\Coding 2022\zombieShooter\zombieShooter\obj\Debug\net6.0-windows\zombieShooter.pdb
+E:\Coding 2022\zombieShooter\zombieShooter\obj\Debug\net6.0-windows\zombieShooter.genruntimeconfig.cache
+E:\Coding 2022\zombieShooter\zombieShooter\obj\Debug\net6.0-windows\ref\zombieShooter.dll
