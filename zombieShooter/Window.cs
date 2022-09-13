@@ -56,7 +56,25 @@ public partial class Window : Form
 
     private void KeyIsUp(object sender, KeyEventArgs e)
     {
+        if (e.KeyCode == Keys.A)
+        {
+            _goLeft = false;
+        }
+        
+        if (e.KeyCode == Keys.D)
+        {
+            _goRight = false;
+        }
+        
+        if (e.KeyCode == Keys.W)
+        {
+            _goUp = false;
+        }
 
+        if (e.KeyCode == Keys.S)
+        {
+            _goDown = false;
+        }
     }
 
     private void ShootBullet(string direction)
