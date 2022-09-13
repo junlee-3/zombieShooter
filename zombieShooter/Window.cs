@@ -32,22 +32,22 @@ public partial class Window : Form
         txtAmmo.Text = "Ammunition: " + ammunition;
         txtScore.Text = "Kills: " + score;
 
-        if (_goLeft == true && player.Left > 0)
+        if (_goLeft && player.Left > 0)
         {
             player.Left -= speed; 
         }
         
-        if (_goRight == true && player.Left + player.Width < this.ClientSize.Width)
+        if (_goRight && player.Left + player.Width < ClientSize.Width)
         {
             player.Left += speed;
         }
 
-        if (_goUp == true && player.Top > 0)
+        if (_goUp && player.Top > 0)
         {
             player.Top -= speed;
         }
 
-        if (_goDown == true && player.Top + player.Height < this.ClientSize.Height)
+        if (_goDown && player.Top + player.Height < ClientSize.Height)
         {
             player.Top += speed;
         }
@@ -75,7 +75,7 @@ public partial class Window : Form
                 break;
             case Keys.S:
                 _goDown = true;
-                facing = "down";
+                facing = "down";    
                 player.Image = Properties.Resources.down;
                 break;
         }
