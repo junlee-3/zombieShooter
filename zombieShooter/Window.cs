@@ -24,56 +24,47 @@ public partial class Window : Form
 
     private void KeyIsDown(object sender, KeyEventArgs e)
     {
-        if (e.KeyCode == Keys.A)
+        switch (e.KeyCode)
         {
-            _goLeft = true;
-            facing = "left";
-            player.Image = Properties.Resources.left;
+            case Keys.A:
+                _goLeft = true;
+                facing = "left";
+                player.Image = Properties.Resources.left;
+                break;
+            case Keys.D:
+                _goRight = true;
+                facing = "right";
+                player.Image = Properties.Resources.right;
+                break;
+            case Keys.W:
+                _goUp = true;
+                facing = "up";
+                player.Image = Properties.Resources.up;
+                break;
+            case Keys.S:
+                _goDown = true;
+                facing = "down";
+                player.Image = Properties.Resources.down;
+                break;
         }
-        
-        if (e.KeyCode == Keys.D)
-        {
-            _goRight = true;
-            facing = "right";
-            player.Image = Properties.Resources.right;
-        }
-        
-        if (e.KeyCode == Keys.W)
-        {
-            _goUp = true;
-            facing = "up";
-            player.Image = Properties.Resources.up;
-        }
-
-        if (e.KeyCode == Keys.S)
-        {
-            _goDown = true;
-            facing = "down";
-            player.Image = Properties.Resources.down;
-        }
-
     }
 
     private void KeyIsUp(object sender, KeyEventArgs e)
     {
-        if (e.KeyCode == Keys.A)
+        switch (e.KeyCode)
         {
-            _goLeft = false;
-        }
-        
-        if (e.KeyCode == Keys.D)
-        {
-            _goRight = false;
-        }
-        
-        if (e.KeyCode == Keys.W)
-        {
-            _goUp = false;
-        }
-
-        if (e.KeyCode == Keys.S)
-        {
-            _goDown = false;
+            case Keys.A:
+                _goLeft = false;
+                break;
+            case Keys.D:
+                _goRight = false;
+                break;
+            case Keys.W:
+                _goUp = false;
+                break;
+            case Keys.S:
+                _goDown = false;
+                break;
         }
     }
 
