@@ -16,6 +16,7 @@ public partial class Window : Form
     public Window()
     {
         InitializeComponent();
+        RestartGame();
     }
 
     private void MainTimerEvent(object sender, EventArgs e)
@@ -71,7 +72,7 @@ public partial class Window : Form
 
     private void KeyIsDown(object sender, KeyEventArgs e)
     {
-        switch (e.KeyCode)
+        switch (e.KeyCode)  
         {
             case Keys.A:
                 _goLeft = true;
@@ -166,6 +167,29 @@ public partial class Window : Form
 
     private void RestartGame()
     {
+        player.Image = Properties.Resources.up;
+
+        foreach (PictureBox i in zombiesList)
+        {
+            Controls.Remove(i);
+        }
         
+        zombiesList.Clear();
+
+        for (var i = 0; i < 3; i++)
+        {
+            MakeZombies();
+        }
+
+        _goUp = false;
+        _goDown = false;
+        _goLeft = false;
+        _goRight = false;
+
+        playerHealth = 100;
+        score = 0;
+        ammunition = 10;
+        
+        gameTimer.Start();
     }
 }
