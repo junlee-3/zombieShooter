@@ -116,7 +116,19 @@ public partial class Window : Form
 
     private void MakeZombies()
     {
-        
+        PictureBox zombie = new PictureBox();
+        zombie.Tag = "zombie";
+        zombie.Image = Properties.Resources.zdown;
+        zombie.Left = randNum.Next(0, 900);
+        zombie.Top = randNum.Next(0, 800);
+        zombie.SizeMode = PictureBoxSizeMode.AutoSize;
+        zombiesList.Add(zombie);
+        Controls.Add(zombie);
+        player.BringToFront();
+    }
+
+    private void dropAmmoBox()
+    {
     }
 
     private void RestartGame()
