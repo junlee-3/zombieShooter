@@ -27,6 +27,8 @@ public partial class Window : Form
         else
         {
             gameOver = true;
+            player.Image = Properties.Resources.dead;
+            gameTimer.Stop();
         }
 
         txtAmmo.Text = "Ammunition: " + ammunition;
@@ -50,6 +52,19 @@ public partial class Window : Form
         if (_goDown && player.Top + player.Height < ClientSize.Height)
         {
             player.Top += speed;
+        }
+
+        foreach (Control x in this.Controls)
+        {
+            if (x is PictureBox && (string)x.Tag == "ammo")
+            {
+                if (player.Bounds.IntersectsWith(x.Bounds))
+                {
+                    Controls.Remove(x);
+                    ((PictureBox)x).Dispose();
+                    ammunition += 5;
+                }
+            }
         }
         
     }
@@ -97,16 +112,17 @@ public partial class Window : Form
             case Keys.S:
                 _goDown = false;
                 break;
-        }
-
-        if (e.KeyCode == Keys.Space && ammunition > 0)
-        {
-            ammunition--;
-            ShootBullet(facing);
-            if (ammunition < 1)
-            {
-                dropAmmoBox();
-            }
+            case Keys.Space:
+                if (ammunition > 0)
+                {
+                    ammunition--;
+                    ShootBullet(facing);
+                    if (ammunition < 1)
+                    {
+                        dropAmmoBox();
+                    }
+                }
+                break;
         }
     }
 
