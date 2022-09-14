@@ -70,6 +70,12 @@ public partial class Window : Form
              //Basic "AI" That tells zombie to go towards player
              if (x is PictureBox && (string)x.Tag == "zombie")
              {
+
+                 if (player.Bounds.IntersectsWith(x.Bounds))
+                 {
+                     playerHealth -= 1;
+                 }
+                 
                  if (x.Left > player.Left)
                  {
                      x.Left -= zombieSpeed;
