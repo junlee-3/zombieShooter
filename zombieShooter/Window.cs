@@ -123,6 +123,11 @@ public partial class Window : Form
 
     private void KeyIsDown(object sender, KeyEventArgs e)
     {
+        if (gameOver)
+        {
+            return;
+        }
+        
         switch (e.KeyCode)  
         {
             case Keys.A:
@@ -165,7 +170,7 @@ public partial class Window : Form
                 _goDown = false;
                 break;
             case Keys.Space:
-                if (ammunition > 0)
+                if (ammunition > 0 && gameOver == false)
                 {
                     ammunition--;
                     ShootBullet(facing);
@@ -175,7 +180,15 @@ public partial class Window : Form
                     }
                 }
                 break;
+            case Keys.Enter:
+                if (gameOver)
+                {
+                    RestartGame();
+                }
+
+                break;
         }
+        
     }
 
     private void ShootBullet(string direction)
@@ -236,6 +249,7 @@ public partial class Window : Form
         _goDown = false;
         _goLeft = false;
         _goRight = false;
+        gameOver = false;
 
         playerHealth = 100;
         score = 0;
