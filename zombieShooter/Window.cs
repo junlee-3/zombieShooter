@@ -97,9 +97,16 @@ public partial class Window : Form
             case Keys.S:
                 _goDown = false;
                 break;
-            case Keys.Space:
-                ShootBullet(facing);
-                break;
+        }
+
+        if (e.KeyCode == Keys.Space && ammunition > 0)
+        {
+            ammunition--;
+            ShootBullet(facing);
+            if (ammunition < 1)
+            {
+                dropAmmoBox();
+            }
         }
     }
 
@@ -129,6 +136,16 @@ public partial class Window : Form
 
     private void dropAmmoBox()
     {
+        PictureBox ammo = new PictureBox();
+        ammo.Image = Properties.Resources.ammo_Image;
+        ammo.SizeMode = PictureBoxSizeMode.AutoSize;
+        ammo.Left = randNum.Next(10, this.ClientSize.Width - ammo.Width);
+        ammo.Top = randNum.Next(10, this.ClientSize.Width - ammo.Width);
+        ammo.Tag = "ammo";
+        Controls.Add(ammo);
+        
+        ammo.BringToFront();
+        player.BringToFront();
     }
 
     private void RestartGame()
