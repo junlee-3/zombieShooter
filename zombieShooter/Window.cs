@@ -98,7 +98,7 @@ public partial class Window : Form
                  {
                      x.Top += zombieSpeed;
                      ((PictureBox)x).Image = Properties.Resources.zdown;
-                 } 
+                 }
              }
 
              foreach (Control j in this.Controls)
@@ -176,7 +176,7 @@ public partial class Window : Form
                     ShootBullet(facing);
                     if (ammunition < 1)
                     {
-                        dropAmmoBox();
+                        DropAmmoBox();
                     }
                 }
                 break;
@@ -215,18 +215,22 @@ public partial class Window : Form
         player.BringToFront();
     }
 
-    private void dropAmmoBox()
+    private void DropAmmoBox()
     {
         PictureBox ammo = new PictureBox();
         ammo.Image = Properties.Resources.ammo_Image;
-        ammo.SizeMode = PictureBoxSizeMode.AutoSize;
+        ammo.SizeMode = PictureBoxSizeMode.AutoSize;    
         ammo.Left = randNum.Next(10, this.ClientSize.Width - ammo.Width);
-        ammo.Top = randNum.Next(10, this.ClientSize.Width - ammo.Width);
+        ammo.Top = randNum.Next(60, this.ClientSize.Height - ammo.Height);
         ammo.Tag = "ammo";
         Controls.Add(ammo);
-        
         ammo.BringToFront();
         player.BringToFront();
+    }
+
+    private void DropMedKit()
+    {
+        PictureBox MedKit = new PictureBox();
     }
 
     private void RestartGame()
