@@ -85,14 +85,31 @@ public partial class Window : Form
                  if (x.Top > player.Top)
                  {
                      x.Top -= zombieSpeed;
-                     ((PictureBox)x).Image = Properties.Resources.zdown;
+                     ((PictureBox)x).Image = Properties.Resources.zup;
                  } 
                  
                  if (x.Top < player.Top)
                  {
                      x.Top += zombieSpeed;
-                     ((PictureBox)x).Image = Properties.Resources.zup;
+                     ((PictureBox)x).Image = Properties.Resources.zdown;
                  } 
+             }
+
+             foreach (Control j in this.Controls)
+             {
+                 if (j is PictureBox && (string)j.Tag == "bullet" && x is PictureBox && (string)x.Tag == "zombie")
+                 {
+                     if (x.Bounds.IntersectsWith(j.Bounds))
+                     {
+                         score++;
+                         
+                         Controls.Remove(j);
+                         ((PictureBox)j).Dispose();
+                         Controls.Remove(x);
+                         zombiesList.Remove(((PictureBox)x));
+                         MakeZombies();
+                     }
+                 }
              }
         }
         
