@@ -105,7 +105,13 @@ public partial class Window : Form
 
     private void ShootBullet(string direction)
     {
-        
+        Bullet shootBullet = new Bullet
+        {
+            direction = direction,
+            bulletLeft = player.Left + (player.Width / 2),
+            bulletTop = player.Top + (player.Height / 2)
+        };
+        shootBullet.MakeBullet(this);
     }
 
     private void MakeZombies()
