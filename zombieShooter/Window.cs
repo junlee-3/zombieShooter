@@ -66,6 +66,34 @@ public partial class Window : Form
                     ammunition += 5;
                 }
             }
+            
+             //Basic "AI" That tells zombie to go towards player
+             if (x is PictureBox && (string)x.Tag == "zombie")
+             {
+                 if (x.Left > player.Left)
+                 {
+                     x.Left -= zombieSpeed;
+                     ((PictureBox)x).Image = Properties.Resources.zleft;
+                 }
+                 
+                 if (x.Left < player.Left)
+                 {
+                     x.Left += zombieSpeed;
+                     ((PictureBox)x).Image = Properties.Resources.zright;
+                 } 
+                 
+                 if (x.Top > player.Top)
+                 {
+                     x.Top -= zombieSpeed;
+                     ((PictureBox)x).Image = Properties.Resources.zdown;
+                 } 
+                 
+                 if (x.Top < player.Top)
+                 {
+                     x.Top += zombieSpeed;
+                     ((PictureBox)x).Image = Properties.Resources.zup;
+                 } 
+             }
         }
         
     }
