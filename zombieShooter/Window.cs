@@ -231,6 +231,13 @@ public partial class Window : Form
     private void DropMedKit()
     {
         PictureBox MedKit = new PictureBox();
+        MedKit.SizeMode = PictureBoxSizeMode.AutoSize;
+        MedKit.Left = randNum.Next(10, this.ClientSize.Width - MedKit.Width);
+        MedKit.Top = randNum.Next(60, this.ClientSize.Height - MedKit.Height);
+        MedKit.Tag = "Medkit";
+        Controls.Add(MedKit);
+        MedKit.BringToFront();
+        player.BringToFront();
     }
 
     private void RestartGame()
