@@ -55,14 +55,14 @@ public partial class Window : Form
             player.Top += speed;
         }
 
-        foreach (Control x in this.Controls)
+        foreach (Control x in Controls)
         {
-            if (x is PictureBox && (string)x.Tag == "ammo")
+            if (x is PictureBox pictureBox && (string)pictureBox.Tag == "ammo")
             {
-                if (player.Bounds.IntersectsWith(x.Bounds))
+                if (player.Bounds.IntersectsWith(pictureBox.Bounds))
                 {
-                    Controls.Remove(x);
-                    ((PictureBox)x).Dispose();
+                    Controls.Remove(pictureBox);
+                    pictureBox.Dispose();
                     ammunition += 5;
                 }
             }
@@ -101,21 +101,23 @@ public partial class Window : Form
                  }
              }
 
-             foreach (Control j in this.Controls)
+             foreach (Control j in Controls)
              {
-                 if (j is PictureBox && (string)j.Tag == "bullet" && x is PictureBox && (string)x.Tag == "zombie")
+                 var box = j as PictureBox;
+                 if (box != null && (string)box.Tag == "bullet" && x is PictureBox &&
+                     (string)x.Tag == "zombie") continue;
+                 if (box != null && !x.Bounds.IntersectsWith(box.Bounds)) continue;
+                 score++;
+
+                 if (box != null)
                  {
-                     if (x.Bounds.IntersectsWith(j.Bounds))
-                     {
-                         score++;
-                         
-                         Controls.Remove(j);
-                         ((PictureBox)j).Dispose();
-                         Controls.Remove(x);
-                         zombiesList.Remove(((PictureBox)x));
-                         MakeZombies();
-                     }
+                     Controls.Remove(box);
+                     box.Dispose();
                  }
+
+                 Controls.Remove(x);
+                 zombiesList.Remove(((PictureBox)x));
+                 MakeZombies();
              }
         }
         
