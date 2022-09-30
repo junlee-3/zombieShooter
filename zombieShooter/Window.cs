@@ -2,16 +2,16 @@ namespace zombieShooter;
 
 public partial class Window : Form
 {
-    private bool _goLeft, _goRight, _goUp, _goDown, gameOver;
-    private string facing = "up";
-    private int playerHealth = 100;
-    private int speed = 10;
-    private int ammunition = 10;
-    private int zombieSpeed = 3;
-    private int score = 0;
-    private Random randNum = new Random();
+    private bool _goLeft, _goRight, _goUp, _goDown, _gameOver;
+    private string _facing = "up";
+    private int _playerHealth = 100;
+    private const int Speed = 10;
+    private int _ammunition = 10;
+    private const int ZombieSpeed = 3;
+    private int _score = 0;
+    private readonly Random _randNum = new Random();
 
-    private List<PictureBox> zombiesList = new List<PictureBox>(); 
+    private readonly List<PictureBox> _zombiesList = new List<PictureBox>(); 
     
     public Window()
     {
@@ -21,38 +21,38 @@ public partial class Window : Form
 
     private void MainTimerEvent(object sender, EventArgs e)
     {
-        if (playerHealth > 1)
+        if (_playerHealth > 1)
         {
-            healthBar.Value = playerHealth;
+            healthBar.Value = _playerHealth;
         }
         else
         {
-            gameOver = true;
+            _gameOver = true;
             player.Image = Properties.Resources.dead;
             gameTimer.Stop();
         }
 
-        txtAmmo.Text = "Ammunition: " + ammunition;
-        txtScore.Text = "Kills: " + score;
+        txtAmmo.Text = "Ammunition: " + _ammunition;
+        txtScore.Text = "Kills: " + _score;
 
         if (_goLeft && player.Left > 0)
         {
-            player.Left -= speed; 
+            player.Left -= Speed; 
         }
         
         if (_goRight && player.Left + player.Width < ClientSize.Width)
         {
-            player.Left += speed;
+            player.Left += Speed;
         }
 
         if (_goUp && player.Top > 0)
         {
-            player.Top -= speed;
+            player.Top -= Speed;
         }
 
         if (_goDown && player.Top + player.Height < ClientSize.Height)
         {
-            player.Top += speed;
+            player.Top += Speed;
         }
 
         foreach (Control x in this.Controls)
@@ -63,7 +63,7 @@ public partial class Window : Form
                 {
                     Controls.Remove(x);
                     ((PictureBox)x).Dispose();
-                    ammunition += 5;
+                    _ammunition += 5;
                 }
             }
             
@@ -73,30 +73,30 @@ public partial class Window : Form
 
                  if (player.Bounds.IntersectsWith(x.Bounds))
                  {
-                     playerHealth -= 1;
+                     _playerHealth -= 1;
                  }
                  
                  if (x.Left > player.Left)
                  {
-                     x.Left -= zombieSpeed;
+                     x.Left -= ZombieSpeed;
                      ((PictureBox)x).Image = Properties.Resources.zleft;
                  }
                  
                  if (x.Left < player.Left)
                  {
-                     x.Left += zombieSpeed;
+                     x.Left += ZombieSpeed;
                      ((PictureBox)x).Image = Properties.Resources.zright;
                  } 
                  
                  if (x.Top > player.Top)
                  {
-                     x.Top -= zombieSpeed;
+                     x.Top -= ZombieSpeed;
                      ((PictureBox)x).Image = Properties.Resources.zup;
                  } 
                  
                  if (x.Top < player.Top)
                  {
-                     x.Top += zombieSpeed;
+                     x.Top += ZombieSpeed;
                      ((PictureBox)x).Image = Properties.Resources.zdown;
                  }
              }
@@ -107,12 +107,12 @@ public partial class Window : Form
                  {
                      if (x.Bounds.IntersectsWith(j.Bounds))
                      {
-                         score++;
+                         _score++;
                          
                          Controls.Remove(j);
                          ((PictureBox)j).Dispose();
                          Controls.Remove(x);
-                         zombiesList.Remove(((PictureBox)x));
+                         _zombiesList.Remove(((PictureBox)x));
                          MakeZombies();
                      }
                  }
@@ -123,7 +123,7 @@ public partial class Window : Form
 
     private void KeyIsDown(object sender, KeyEventArgs e)
     {
-        if (gameOver)
+        if (_gameOver)
         {
             return;
         }
@@ -132,22 +132,22 @@ public partial class Window : Form
         {
             case Keys.A:
                 _goLeft = true;
-                facing = "left";
+                _facing = "left";
                 player.Image = Properties.Resources.left;
                 break;
             case Keys.D:
                 _goRight = true;
-                facing = "right";
+                _facing = "right";
                 player.Image = Properties.Resources.right;
                 break;
             case Keys.W:
                 _goUp = true;
-                facing = "up";
+                _facing = "up";
                 player.Image = Properties.Resources.up;
                 break;
             case Keys.S:
                 _goDown = true;
-                facing = "down";    
+                _facing = "down";    
                 player.Image = Properties.Resources.down;
                 break;
         }
@@ -170,25 +170,25 @@ public partial class Window : Form
                 _goDown = false;
                 break;
             case Keys.Space:
-                if (ammunition > 0 && gameOver == false)
+                if (_ammunition > 0 && _gameOver == false)
                 {
-                    ammunition--;
-                    ShootBullet(facing);
-                    if (ammunition < 1)
+                    _ammunition--;
+                    ShootBullet(_facing);
+                    if (_ammunition < 1)
                     {
                         DropAmmoBox();
                     }
                 }
                 break;
             case Keys.Enter:
-                if (gameOver)
+                if (_gameOver)
                 {
                     RestartGame();
                 }
 
                 break;
         }
-        
+
     }
 
     private void ShootBullet(string direction)
@@ -207,10 +207,10 @@ public partial class Window : Form
         PictureBox zombie = new PictureBox();
         zombie.Tag = "zombie";
         zombie.Image = Properties.Resources.zdown;
-        zombie.Left = randNum.Next(0, 900);
-        zombie.Top = randNum.Next(0, 800);
+        zombie.Left = _randNum.Next(0, 900);
+        zombie.Top = _randNum.Next(0, 800);
         zombie.SizeMode = PictureBoxSizeMode.AutoSize;
-        zombiesList.Add(zombie);
+        _zombiesList.Add(zombie);
         Controls.Add(zombie);
         player.BringToFront();
     }
@@ -220,8 +220,8 @@ public partial class Window : Form
         PictureBox ammo = new PictureBox();
         ammo.Image = Properties.Resources.ammo_Image;
         ammo.SizeMode = PictureBoxSizeMode.AutoSize;    
-        ammo.Left = randNum.Next(10, this.ClientSize.Width - ammo.Width);
-        ammo.Top = randNum.Next(60, this.ClientSize.Height - ammo.Height);
+        ammo.Left = _randNum.Next(10, this.ClientSize.Width - ammo.Width);
+        ammo.Top = _randNum.Next(60, this.ClientSize.Height - ammo.Height);
         ammo.Tag = "ammo";
         Controls.Add(ammo);
         ammo.BringToFront();
@@ -230,13 +230,13 @@ public partial class Window : Form
 
     private void DropMedKit()
     {
-        PictureBox MedKit = new PictureBox();
-        MedKit.SizeMode = PictureBoxSizeMode.AutoSize;
-        MedKit.Left = randNum.Next(10, this.ClientSize.Width - MedKit.Width);
-        MedKit.Top = randNum.Next(60, this.ClientSize.Height - MedKit.Height);
-        MedKit.Tag = "Medkit";
-        Controls.Add(MedKit);
-        MedKit.BringToFront();
+        PictureBox medKit = new PictureBox();
+        medKit.SizeMode = PictureBoxSizeMode.AutoSize;
+        medKit.Left = _randNum.Next(10, this.ClientSize.Width - medKit.Width);
+        medKit.Top = _randNum.Next(60, this.ClientSize.Height - medKit.Height);
+        medKit.Tag = "Medkit";
+        Controls.Add(medKit);
+        medKit.BringToFront();
         player.BringToFront();
     }
 
@@ -244,12 +244,12 @@ public partial class Window : Form
     {
         player.Image = Properties.Resources.up;
 
-        foreach (PictureBox i in zombiesList)
+        foreach (PictureBox i in _zombiesList)
         {
             Controls.Remove(i);
         }
         
-        zombiesList.Clear();
+        _zombiesList.Clear();
 
         for (var i = 0; i < 3; i++)
         {
@@ -260,11 +260,12 @@ public partial class Window : Form
         _goDown = false;
         _goLeft = false;
         _goRight = false;
-        gameOver = false;
+        _gameOver = false;
+        
 
-        playerHealth = 100;
-        score = 0;
-        ammunition = 10;
+        _playerHealth = 100;
+        _score = 0;
+        _ammunition = 10;
         
         gameTimer.Start();
     }
